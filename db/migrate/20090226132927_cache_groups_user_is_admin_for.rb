@@ -1,6 +1,6 @@
 class CacheGroupsUserIsAdminFor < ActiveRecord::Migration
   def self.up
-    add_column :users, 'admin_for_group_id_cache', :binary, :limit => 512
+    add_column :users, 'admin_for_group_id_cache', :binary
 
     say "updating membership_cache for: "
     User.find(:all).each do |user|

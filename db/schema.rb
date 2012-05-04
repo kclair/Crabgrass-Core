@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(:version => 20120420202631) do
   end
 
   add_index "activities", ["created_at"], :name => "created_at"
-  execute "CREATE INDEX subject_0_4_0 ON activities (subject_id,subject_type(4),access)"
+  execute "CREATE INDEX subject_0_4_0 ON activities (subject_id,subject_type,access)"
 
   create_table "asset_versions", :force => true do |t|
     t.integer  "asset_id"
@@ -80,7 +80,7 @@ ActiveRecord::Schema.define(:version => 20120420202631) do
   add_index "assets", ["page_terms_id"], :name => "pterms"
 
   create_table "avatars", :force => true do |t|
-    t.binary  "image_file_data", :limit => 2147483647
+    t.binary  "image_file_data"
     t.boolean "public",                                :default => false
   end
 
@@ -121,7 +121,7 @@ ActiveRecord::Schema.define(:version => 20120420202631) do
   create_table "crypt_keys", :force => true do |t|
     t.integer "profile_id"
     t.boolean "preferred",                         :default => false
-    t.text    "key",         :limit => 2147483647
+    t.text    "key"
     t.string  "keyring"
     t.string  "fingerprint"
     t.string  "name"
@@ -129,7 +129,7 @@ ActiveRecord::Schema.define(:version => 20120420202631) do
   end
 
   create_table "custom_appearances", :force => true do |t|
-    t.text     "parameters",        :limit => 2147483647
+    t.text     "parameters"
     t.integer  "parent_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -184,8 +184,8 @@ ActiveRecord::Schema.define(:version => 20120420202631) do
   add_index "email_addresses", ["profile_id"], :name => "email_addresses_profile_id_index"
 
   create_table "events", :force => true do |t|
-    t.text     "description",      :limit => 2147483647
-    t.text     "description_html", :limit => 2147483647
+    t.text     "description"
+    t.text     "description_html"
     t.boolean  "is_all_day",                             :default => false
     t.boolean  "is_cancelled",                           :default => false
     t.boolean  "is_tentative",                           :default => true
@@ -202,7 +202,7 @@ ActiveRecord::Schema.define(:version => 20120420202631) do
     t.string   "media_key"
     t.string   "media_url"
     t.string   "media_thumbnail_url"
-    t.text     "media_embed",         :limit => 2147483647
+    t.text     "media_embed"
     t.integer  "page_terms_id"
     t.datetime "created_at",                                :null => false
     t.datetime "updated_at",                                :null => false
@@ -364,7 +364,7 @@ ActiveRecord::Schema.define(:version => 20120420202631) do
   create_table "messages", :force => true do |t|
     t.datetime "created_at"
     t.string   "type"
-    t.text     "content",     :limit => 2147483647
+    t.text     "content"
     t.integer  "channel_id"
     t.integer  "sender_id"
     t.string   "sender_name"
@@ -398,9 +398,9 @@ ActiveRecord::Schema.define(:version => 20120420202631) do
   create_table "page_terms", :force => true do |t|
     t.integer  "page_id"
     t.string   "page_type"
-    t.text     "access_ids",         :limit => 2147483647
-    t.text     "body",               :limit => 2147483647
-    t.text     "comments",           :limit => 2147483647
+    t.text     "access_ids"
+    t.text     "body"
+    t.text     "comments"
     t.string   "tags"
     t.string   "title"
     t.boolean  "resolved"
@@ -421,8 +421,7 @@ ActiveRecord::Schema.define(:version => 20120420202631) do
   end
 
   add_index "page_terms", ["page_id"], :name => "page_id"
-  execute "ALTER TABLE page_terms ENGINE = MyISAM"
-  execute "CREATE FULLTEXT INDEX idx_fulltext ON page_terms (access_ids,tags)"
+  #execute "CREATE FULLTEXT INDEX idx_fulltext ON page_terms (access_ids,tags)"
 
   create_table "page_tools", :force => true do |t|
     t.integer "page_id"
@@ -440,7 +439,7 @@ ActiveRecord::Schema.define(:version => 20120420202631) do
     t.boolean  "public"
     t.integer  "created_by_id"
     t.integer  "updated_by_id"
-    t.text     "summary",            :limit => 2147483647
+    t.text     "summary"
     t.string   "type"
     t.integer  "message_count",                            :default => 0
     t.integer  "data_id"
@@ -469,7 +468,7 @@ ActiveRecord::Schema.define(:version => 20120420202631) do
   add_index "pages", ["flow"], :name => "index_pages_on_flow"
   add_index "pages", ["created_at"], :name => "index_pages_on_created_at"
   add_index "pages", ["updated_at"], :name => "index_pages_on_updated_at"
-  execute "CREATE INDEX owner_name_4 ON pages (owner_name(4))"
+  execute "CREATE INDEX owner_name_4 ON pages (owner_name)"
   add_index "pages", ["name", "owner_id"], :name => "index_pages_on_name"
 
   create_table "phone_numbers", :force => true do |t|
@@ -496,10 +495,10 @@ ActiveRecord::Schema.define(:version => 20120420202631) do
 
   create_table "possibles", :force => true do |t|
     t.string  "name"
-    t.text    "action",           :limit => 2147483647
+    t.text    "action"
     t.integer "poll_id"
-    t.text    "description",      :limit => 2147483647
-    t.text    "description_html", :limit => 2147483647
+    t.text    "description"
+    t.text    "description_html"
     t.integer "position"
   end
 
@@ -508,8 +507,8 @@ ActiveRecord::Schema.define(:version => 20120420202631) do
   create_table "posts", :force => true do |t|
     t.integer  "user_id"
     t.integer  "discussion_id"
-    t.text     "body",          :limit => 2147483647
-    t.text     "body_html",     :limit => 2147483647
+    t.text     "body"
+    t.text     "body_html"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "deleted_at"
@@ -524,7 +523,7 @@ ActiveRecord::Schema.define(:version => 20120420202631) do
     t.integer "profile_id"
     t.boolean "preferred",                        :default => false
     t.string  "note_type"
-    t.text    "body",       :limit => 2147483647
+    t.text    "body"
   end
 
   add_index "profile_notes", ["profile_id"], :name => "profile_notes_profile_id_index"
@@ -548,7 +547,7 @@ ActiveRecord::Schema.define(:version => 20120420202631) do
     t.datetime "updated_at"
     t.datetime "birthday"
     t.boolean  "fof",                                          :default => false, :null => false
-    t.text     "summary",                :limit => 2147483647
+    t.text     "summary"
     t.integer  "wiki_id"
     t.integer  "layout_id"
     t.boolean  "may_see",                                      :default => true
@@ -567,7 +566,7 @@ ActiveRecord::Schema.define(:version => 20120420202631) do
     t.integer  "discussion_id"
     t.string   "place"
     t.integer  "video_id"
-    t.text     "summary_html",           :limit => 2147483647
+    t.text     "summary_html"
     t.integer  "geo_location_id"
     t.integer  "picture_id"
   end
@@ -616,11 +615,11 @@ ActiveRecord::Schema.define(:version => 20120420202631) do
     t.integer  "site_id"
   end
 
-  execute "CREATE INDEX created_by_0_2 ON requests (created_by_id,state(2))"
-  execute "CREATE INDEX recipient_0_2_2 ON requests (recipient_id,recipient_type(2),state(2))"
-  execute "CREATE INDEX requestable_0_2_2 ON requests (requestable_id,requestable_type(2),state(2))"
+  execute "CREATE INDEX created_by_0_2 ON requests (created_by_id,state)"
+  execute "CREATE INDEX recipient_0_2_2 ON requests (recipient_id,recipient_type,state)"
+  execute "CREATE INDEX requestable_0_2_2 ON requests (requestable_id,requestable_type,state)"
   add_index "requests", ["code"], :name => "code"
-  add_index "requests", ["created_at"], :name => "created_at"
+#  add_index "requests", ["created_at"], :name => "created_at"
   add_index "requests", ["updated_at"], :name => "updated_at"
 
   create_table "showings", :force => true do |t|
@@ -643,11 +642,11 @@ ActiveRecord::Schema.define(:version => 20120420202631) do
     t.string  "email_sender"
     t.integer "pagination_size"
     t.integer "super_admin_group_id"
-    t.text    "translators",            :limit => 2147483647
+    t.text    "translators"
     t.string  "translation_group"
     t.string  "default_language"
-    t.text    "available_page_types",   :limit => 2147483647
-    t.text    "evil",                   :limit => 2147483647
+    t.text    "available_page_types"
+    t.text    "evil"
     t.boolean "tracking"
     t.boolean "default",                                      :default => false
     t.integer "network_id"
@@ -675,7 +674,7 @@ ActiveRecord::Schema.define(:version => 20120420202631) do
     t.integer  "question_id"
     t.integer  "response_id"
     t.integer  "asset_id"
-    t.text     "value",             :limit => 2147483647
+    t.text     "value"
     t.string   "type"
     t.datetime "created_at"
     t.integer  "external_video_id"
@@ -683,11 +682,11 @@ ActiveRecord::Schema.define(:version => 20120420202631) do
 
   create_table "survey_questions", :force => true do |t|
     t.string   "type"
-    t.text     "choices",    :limit => 2147483647
+    t.text     "choices"
     t.integer  "survey_id"
     t.integer  "position"
     t.string   "label"
-    t.text     "details",    :limit => 2147483647
+    t.text     "details"
     t.boolean  "required"
     t.datetime "created_at"
     t.datetime "expires_at"
@@ -707,7 +706,7 @@ ActiveRecord::Schema.define(:version => 20120420202631) do
   end
 
   create_table "surveys", :force => true do |t|
-    t.text     "description",     :limit => 2147483647
+    t.text     "description"
     t.datetime "created_at"
     t.integer  "responses_count",                       :default => 0
     t.string   "settings"
@@ -746,8 +745,8 @@ ActiveRecord::Schema.define(:version => 20120420202631) do
   create_table "tasks", :force => true do |t|
     t.integer  "task_list_id"
     t.string   "name"
-    t.text     "description",      :limit => 2147483647
-    t.text     "description_html", :limit => 2147483647
+    t.text     "description"
+    t.text     "description_html"
     t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -798,8 +797,6 @@ ActiveRecord::Schema.define(:version => 20120420202631) do
     t.integer  "user_id"
   end
 
-  execute "ALTER TABLE trackings ENGINE = MyISAM"
-
   create_table "user_participations", :force => true do |t|
     t.integer  "page_id"
     t.integer  "user_id"
@@ -813,7 +810,7 @@ ActiveRecord::Schema.define(:version => 20120420202631) do
     t.boolean  "viewed"
     t.integer  "message_count",                       :default => 0
     t.boolean  "attend",                              :default => false
-    t.text     "notice",        :limit => 2147483647
+    t.text     "notice"
     t.boolean  "inbox",                               :default => false
   end
 
@@ -907,30 +904,30 @@ ActiveRecord::Schema.define(:version => 20120420202631) do
 
   create_table "wiki_locks", :force => true do |t|
     t.integer "wiki_id"
-    t.text    "locks",        :limit => 2147483647
+    t.text    "locks"
     t.integer "lock_version",                       :default => 0
   end
 
   create_table "wiki_versions", :force => true do |t|
     t.integer  "wiki_id"
     t.integer  "version"
-    t.text     "body",          :limit => 2147483647
-    t.text     "body_html",     :limit => 2147483647
+    t.text     "body"
+    t.text     "body_html"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.text     "raw_structure", :limit => 2147483647
+    t.text     "raw_structure"
   end
 
   add_index "wiki_versions", ["wiki_id"], :name => "index_wiki_versions"
   add_index "wiki_versions", ["wiki_id", "updated_at"], :name => "index_wiki_versions_with_updated_at"
 
   create_table "wikis", :force => true do |t|
-    t.text     "body",          :limit => 2147483647
-    t.text     "body_html",     :limit => 2147483647
+    t.text     "body"
+    t.text     "body_html"
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "version"
-    t.text     "raw_structure", :limit => 2147483647
+    t.text     "raw_structure"
   end
 
   add_index "wikis", ["user_id"], :name => "index_wikis_user_id"

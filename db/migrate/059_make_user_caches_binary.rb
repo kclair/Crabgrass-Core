@@ -11,12 +11,12 @@ class MakeUserCachesBinary < ActiveRecord::Migration
     remove_column :users, 'peer_id_cache'
     remove_column :users, 'tag_id_cache'
 
-    add_column :users, 'direct_group_id_cache', :binary, :limit => 512
-    add_column :users, 'all_group_id_cache',    :binary, :limit => 1024
-    add_column :users, 'friend_id_cache',       :binary, :limit => 1024
-    add_column :users, 'foe_id_cache',          :binary, :limit => 512
-    add_column :users, 'peer_id_cache',         :binary, :limit => 2048
-    add_column :users, 'tag_id_cache',          :binary, :limit => 2048
+    add_column :users, 'direct_group_id_cache', :binary
+    add_column :users, 'all_group_id_cache',    :binary
+    add_column :users, 'friend_id_cache',       :binary
+    add_column :users, 'foe_id_cache',          :binary
+    add_column :users, 'peer_id_cache',         :binary
+    add_column :users, 'tag_id_cache',          :binary
   end
 
   def self.down

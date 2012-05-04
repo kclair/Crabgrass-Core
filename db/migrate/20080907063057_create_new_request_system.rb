@@ -41,10 +41,9 @@ class CreateNewRequestSystem < ActiveRecord::Migration
       t.datetime "updated_at"
     end
 
-    # note: the name suffixes with digits are specifying the key length to schema.rb
-    execute "CREATE INDEX created_by_0_2    ON requests (created_by_id,state(2))"
-    execute "CREATE INDEX recipient_0_2_2   ON requests (recipient_id,recipient_type(2),state(2))"
-    execute "CREATE INDEX requestable_0_2_2 ON requests (requestable_id,requestable_type(2),state(2))"
+    execute "CREATE INDEX created_by_0_2    ON requests (created_by_id,state)"
+    execute "CREATE INDEX recipient_0_2_2   ON requests (recipient_id,recipient_type,state)"
+    execute "CREATE INDEX requestable_0_2_2 ON requests (requestable_id,requestable_type,state)"
 
     add_index :requests, :code, :name => :code
     add_index :requests, :created_at, :name => :created_at

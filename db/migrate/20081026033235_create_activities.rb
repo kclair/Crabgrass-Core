@@ -14,7 +14,7 @@ class CreateActivities < ActiveRecord::Migration
       t.datetime :created_at
     end
     # note: the name suffixes with digits are specifying the key length to schema.rb
-    execute "CREATE INDEX subject_0_4_0 ON activities (subject_id, subject_type(4), public)"
+    execute "CREATE INDEX subject_0_4_0 ON activities (subject_id, subject_type, public)"
     add_index :activities, :created_at, :name => 'created_at'
   end
 

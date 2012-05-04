@@ -1,6 +1,6 @@
 class CreatePageViews < ActiveRecord::Migration
   def self.up
-    create_table :page_views, :options => 'ENGINE=MyISAM' do |t|
+    create_table :page_views do |t|
       t.integer :page_id, :null => false
     end
     connection = ActiveRecord::Base.connection
