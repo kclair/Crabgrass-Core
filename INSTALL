@@ -3,10 +3,15 @@ INSTALLING CRABGRASS
 
 Install basic ruby environment
 
-  sudo apt-get install ruby1.8 ruby-dev rake libmysql-ruby mysql-server git
+  On a debian-based system:
+    sudo apt-get install ruby1.8 ruby-dev rake libmysql-ruby mysql-server git
 
-  (Depending on what you are running, you might need to install git-core instead of git. 
-   You might also need libopenssl-ruby1.8)
+    (Depending on what you are running, you might need to install git-core instead of git. 
+     You might also need libopenssl-ruby1.8)
+
+  On a redhat-based system:
+    yum install ruby ruby-devel rubygem-rake mysql-server mysql-devel git gcc make
+    gem install mysql ruby-debug
 
 Install rubygems from rubygems.org
 
@@ -33,15 +38,16 @@ Checkout the codebase
 
     git clone gitosis@labs.riseup.net:crabgrass-core.git
 
-Create a secret
-
-   cd crabgrass-core
-   rake create_a_secret
-
 Install required gems
 
   sudo gem install rails --version='~>2.3.14'
+  rake gems:build
   sudo rake gems:install
+
+Create a secret
+
+  cd crabgrass-core
+  rake create_a_secret
 
 Create the database:
 
@@ -51,8 +57,12 @@ Create the database:
   rake db:fixtures:load
 
 Install helper applications:
+ 
+  On Debian/Ubuntu:
+    sudo apt-get install graphicsmagick
 
-  sudo apt-get install graphicsmagick
+  On RHEL/CentOS:
+    yum install ImageMagick
 
 Run server:
 
